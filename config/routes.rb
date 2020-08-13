@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :clients, except: [:show]
   resources :suppliers, except: [:show]
   resources :products, except: [:show]
+  resources :sales, except: [:show, :update]
 end
