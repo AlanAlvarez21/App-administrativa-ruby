@@ -1,17 +1,33 @@
 class SalesController < ApplicationController 
 
-def index 
-    @ventas = Sale.all
-end
+    before_action :set_sale, only: [:edit]
 
-def new 
-    @venta = Sale.create(importe: 0)
-    redirect_to edit_sale_path(@venta)
-end 
+        def index 
+            @ventas = Sale.all
+        end
 
-def edit 
-    @productos_venta = @venta.sale_details
-end
+        def new 
+            @venta = Sale.create(importe: 0)
+            redirect_to edit_sale_path(@venta)
+        end 
 
+        def edit 
+            @productos_venta = @venta.sale_details
+        end
+
+        def destroy 
+            @venta.destroy
+
+            respond_to do |format|
+                format.html {redirect_to sales_url, notices: "La venta a sido eliminada"}
+                format.json {head :no_content}
+            end 
+        end 
+    
+        private   
+
+    def set_sale 
+        @venta = Sale.find(params[:id])
+    end 
 
 end 
