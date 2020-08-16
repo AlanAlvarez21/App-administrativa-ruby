@@ -6,7 +6,6 @@ ruby '2.7.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -52,6 +51,8 @@ gem "mime-types"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'sqlite3'
+
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
@@ -75,6 +76,7 @@ end
 group :production do 
 
  gem 'pg'
+ gem 'rails_12factor'
 end 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
