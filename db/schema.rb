@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_022007) do
+ActiveRecord::Schema.define(version: 2020_08_15_200236) do
 
   create_table "categories", force: :cascade do |t|
     t.string "nombre"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 2020_08_13_022007) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "client_id"
+    t.index ["client_id"], name: "index_sales_on_client_id"
   end
 
   create_table "suppliers", force: :cascade do |t|

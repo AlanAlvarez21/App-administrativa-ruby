@@ -1,14 +1,11 @@
 <%= stylesheet_link_tag 'sales' %>
 <div class = "row">
-
   <div class="col-md-6">
     <h3 class="h3 mb-2 text-gray-800">Punto de venta</h3>
   </div>
-
   <div class="col-md-6" style="text-align:right;">
     <h2 id="importe_venta_lbl" > Importe $<%= @venta.importe %> </h2>
   </div>
-
   <div class="col-md-5">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#buscador_producto">
       Buscar producto
@@ -17,18 +14,15 @@
       Buscar cliente
     </button>
   </div>
-  
   <div class="col-md-7" style="text-align:right;">
     <%= link_to 'Finalizar venta', sales_path, class: "btn btn-success" %>
     
     <%= link_to 'Cancelar venta', @venta, method: :delete, data: { confirm: '¿Cancelar la venta?' }, class: "btn btn-danger" %>
   </div>
-  
   <div id="cliente_venta" class="nombre-cliente col-md-3" > 
-        Cliente general                                                               
+    <%= "Cliente: #{@venta.client.present? ? @venta.client.nombre : "Cliente general"}" %>
   </div>
-
-  </div>
+</div>
 <br />
 <div class="card shadow mb-4">
 <div class="card-body">
@@ -47,10 +41,10 @@
           <tr> 
           <td> No hay productos en la venta </td><td></td><td></td> 
           </tr>
-          <% else %> 
+          <% else %>
             <% @productos_venta.each do |det| %>
               <tr> 
-                <td> <%= det.product.try(:nombre_producto) %> </td>
+                <td> <%= det.product.try(:nombre) %> </td>
                 <td> <%= det.product.try(:precio) %> </td>
                 <td> <%= det.cantidad %> </td>
                 <td> $ <%= det.product.try(:precio) * det.cantidad %> </td>

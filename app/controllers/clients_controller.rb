@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-    before_action :set_client, only: [:edit, :update, :destroy]
+    before_action :set_client, only: [ :edit, :update, :destroy]
 
     def index
         @clientes = Client.all
@@ -45,6 +45,20 @@ class ClientsController < ApplicationController
             format.json { head :no_content }
         end
     end
+
+   
+    def buscador
+        @resultados = Client.buscador(params[:termino]).map do |cliente|
+          {
+              id: cliente.id,
+              nombre_cliente: cliente.nombre
+          }
+        end
+  
+        respond_to do |format|
+          format.json { render :json => @resultados }
+        end
+      end
 
     private 
     def set_client
