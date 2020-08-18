@@ -16,13 +16,22 @@ class SalesController < ApplicationController
         end
 
         def destroy 
-            @venta.destroy
-
-            respond_to do |format|
-                format.html {redirect_to sales_url, notices: "La venta a sido eliminada"}
-                format.json {head :no_content}
+            ActiveRecord::Base.transacion do 
+                @venta.sale_details.map do |detail|
+                  prod_vendido = Product.find(detail.product_id)
+                  prod_vendido.existencia+= detail.cantidad
+                 ActiveRecord::Rollback unless prod_vendido.save #si la eliminacion falla regresa la db a su estado anterior 
             end 
-        end 
+
+            ActiveRecord::Rollback unless @venta.destroy
+          end 
+            
+
+               respond_to do |format|
+               format.html {redirect_to sales_url, notices: "La venta a sido eliminada"}
+               format.json {head :no_content}
+            end 
+          end 
 
         def show
 

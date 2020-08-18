@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
 
   has_many :sales
+  has_many :warehouse_records
 end
