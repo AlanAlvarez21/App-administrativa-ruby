@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
   devise_for :users
   root to: 'home#index'
   resources :categories, except: [:show]
@@ -21,5 +22,6 @@ Rails.application.routes.draw do
 
   resources :profiles, only: [:show, :edit, :update]
 
-  post '/search', to: 'search#results'
+
+
 end
