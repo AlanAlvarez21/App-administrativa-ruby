@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :profiles, only: [:show, :edit, :update]
 
+  post '/search', to: 'search#results'
   
 
 end
